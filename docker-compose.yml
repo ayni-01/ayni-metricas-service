@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ayni-metricas-db
+    environment:
+      POSTGRES_DB: somosayni
+      POSTGRES_USER: somosayni
+      POSTGRES_PASSWORD: somosayni123
+    ports:
+      - "5438:5432"
+    volumes:
+      - metricas_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U somosayni"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  metricas-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ayni-metricas-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_USERNAME: somosayni
+      DB_PASSWORD: somosayni123
+      JWT_SECRET: ${JWT_SECRET}
+    ports:
+      - "8087:8087"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  metricas_data:
