@@ -132,8 +132,17 @@ docker-compose up --build
 | Recurso | URL |
 |---------|-----|
 | Servicio | `http://localhost:8087` |
-| Swagger UI | `http://localhost:8087/swagger-ui.html` |
-| OpenAPI JSON | `http://localhost:8087/api-docs` |
+
+## Swagger / OpenAPI
+
+| | Link |
+|---|---|
+| **Swagger UI (local)** | [http://localhost:8087/swagger-ui.html](http://localhost:8087/swagger-ui.html) |
+| **OpenAPI JSON (local)** | [http://localhost:8087/api-docs](http://localhost:8087/api-docs) |
+| **swagger.json (repo)** | [ver en GitHub](https://github.com/ayni-01/ayni-metricas-service/blob/main/swagger.json) |
+| **Swagger Editor (online)** | [abrir en Swagger Editor](https://editor.swagger.io/?url=https://raw.githubusercontent.com/ayni-01/ayni-metricas-service/main/swagger.json) |
+
+> Para probar los endpoints protegidos: copia el JWT del login → clic en **Authorize** → pega `Bearer <tu-token>`.
 
 ---
 
