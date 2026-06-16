@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 @Component
@@ -40,6 +42,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     public String getHeader(String name) {
                         if ("X-User-Id".equalsIgnoreCase(name)) return userId;
                         return super.getHeader(name);
+                    }
+
+                    @Override
+                    public Enumeration<String> getHeaders(String name) {
+                        if ("X-User-Id".equalsIgnoreCase(name)) {
+                            return Collections.enumeration(Collections.singletonList(userId));
+                        }
+                        return super.getHeaders(name);
+                    }
+
+                    @Override
+                    public Enumeration<String> getHeaderNames() {
+                        List<String> names = Collections.list(super.getHeaderNames());
+                        if (names.stream().noneMatch(n -> n.equalsIgnoreCase("X-User-Id"))) {
+                            names.add("X-User-Id");
+                        }
+                        return Collections.enumeration(names);
                     }
                 };
 
