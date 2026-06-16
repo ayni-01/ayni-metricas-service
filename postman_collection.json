@@ -1,0 +1,134 @@
+{
+  "info": {
+    "name": "Somos Ayni — metricas-service",
+    "description": "Endpoints del metricas-service (puerto 8087). Requiere JWT de identidad-service (puerto 8081).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_IDENTIDAD",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "BASE_PERFILES",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "BASE_RETOS",
+      "value": "http://localhost:8083"
+    },
+    {
+      "key": "BASE_POSTULACIONES",
+      "value": "http://localhost:8084"
+    },
+    {
+      "key": "BASE_HABILIDADES",
+      "value": "http://localhost:8085"
+    },
+    {
+      "key": "BASE_NOTIFICACIONES",
+      "value": "http://localhost:8086"
+    },
+    {
+      "key": "BASE_METRICAS",
+      "value": "http://localhost:8087"
+    },
+    {
+      "key": "TOKEN_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "TOKEN_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "ID_EMPRESA",
+      "value": ""
+    },
+    {
+      "key": "ID_TALENTO",
+      "value": ""
+    },
+    {
+      "key": "RETO_ID",
+      "value": ""
+    },
+    {
+      "key": "POSTULACION_ID",
+      "value": ""
+    },
+    {
+      "key": "NOTIFICACION_ID",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Métricas de la Empresa",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_EMPRESA}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_METRICAS}}/api/v1/metricas/empresa/{{ID_EMPRESA}}",
+          "host": [
+            "{{BASE_METRICAS}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "metricas",
+            "empresa",
+            "{{ID_EMPRESA}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Embudo de Conversión",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{TOKEN_EMPRESA}}"
+          }
+        ],
+        "url": {
+          "raw": "{{BASE_METRICAS}}/api/v1/metricas/embudo/{{ID_EMPRESA}}",
+          "host": [
+            "{{BASE_METRICAS}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "metricas",
+            "embudo",
+            "{{ID_EMPRESA}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_METRICAS}}/actuator/health",
+          "host": [
+            "{{BASE_METRICAS}}"
+          ],
+          "path": [
+            "actuator",
+            "health"
+          ]
+        }
+      }
+    }
+  ]
+}
